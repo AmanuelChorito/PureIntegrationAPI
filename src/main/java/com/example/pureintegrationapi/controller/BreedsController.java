@@ -1,6 +1,7 @@
 package com.example.pureintegrationapi.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,19 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/breeds")
 public class BreedsController {
+    private ObjectMapper objectMapper;
     @Autowired
-      ObjectMapper objectMapper;
+    public BreedsController(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
+
+
 
     @GetMapping("/list/all")
     public ResponseEntity<Object> getList() throws IOException {
-
-        List<JSONObject> entities  = ( objectMapper.readValue(new File("apidata.json"), new TypeReference<List<JSONObject>>() {}));
+        objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+        List<JSONObject> entities  = (objectMapper.readValue(new File("apidata.json"), new TypeReference<List<JSONObject>>() {}));
 
         return new ResponseEntity<Object>(entities, HttpStatus.OK);
     }
