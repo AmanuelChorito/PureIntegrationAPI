@@ -1,5 +1,6 @@
 package com.example.pureintegrationapi.controller;
 
+import com.example.pureintegrationapi.domain.Breed;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,14 +26,12 @@ public class BreedsController {
     }
 
 
-
-
     @GetMapping("/list/all")
-    public ResponseEntity<Object> getList() throws IOException {
+    public ResponseEntity<Breed> getList() throws IOException {
 
-        List<JSONObject> entities  = (objectMapper.readValue(new File("apidata.json"), new TypeReference<List<JSONObject>>() {}));
+        return new ResponseEntity<>((objectMapper.readValue(new File("apidata.json"), Breed.class)),HttpStatus.OK);
 
-        return new ResponseEntity<Object>(entities, HttpStatus.OK);
+       // return new ResponseEntity<Object>(entities, HttpStatus.OK);
     }
 
 }
