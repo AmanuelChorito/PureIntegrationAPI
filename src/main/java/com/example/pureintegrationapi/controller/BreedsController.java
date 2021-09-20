@@ -25,7 +25,7 @@ public class BreedsController {
 
         List<JSONObject> entities  = ( objectMapper.readValue(new File("apidata.json"), new TypeReference<List<JSONObject>>() {}));
 
-        return new ResponseEntity<Object>(entities, HttpStatus.OK);˚
+        return new ResponseEntity<Object>(entities, HttpStatus.OK);
     }
 
 }
