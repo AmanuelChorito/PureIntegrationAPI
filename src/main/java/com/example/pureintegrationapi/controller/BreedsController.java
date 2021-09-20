@@ -23,9 +23,9 @@ public class BreedsController {
     @GetMapping("/list/all")
     public ResponseEntity<Object> getList() throws IOException {
 
-        List<JSONObject> entities  = ((List<JSONObject>) objectMapper.readValue(new File("apidata.json"), new TypeReference<JSONObject>() {}));
+        List<JSONObject> entities  = ( objectMapper.readValue(new File("apidata.json"), new TypeReference<List<JSONObject>>() {}));
 
-        return new ResponseEntity<Object>(entities, HttpStatus.OK);
+        return new ResponseEntity<Object>(entities, HttpStatus.OK);˚
     }
 
 }
