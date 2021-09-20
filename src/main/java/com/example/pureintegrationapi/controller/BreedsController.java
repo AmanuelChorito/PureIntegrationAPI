@@ -29,7 +29,7 @@ public class BreedsController {
 
     @GetMapping("/list/all")
     public ResponseEntity<Object> getList() throws IOException {
-        objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+
         List<JSONObject> entities  = (objectMapper.readValue(new File("apidata.json"), new TypeReference<List<JSONObject>>() {}));
 
         return new ResponseEntity<Object>(entities, HttpStatus.OK);
