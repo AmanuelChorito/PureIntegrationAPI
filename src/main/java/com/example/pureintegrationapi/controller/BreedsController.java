@@ -23,7 +23,7 @@ public class BreedsController {
     @GetMapping("/list/all")
     public ResponseEntity<Object> getList() throws IOException {
 
-        List<JSONObject> entities  = (objectMapper.readValue(new File("apidata.json"), new TypeReference<List<JSONObject>>() {}));
+        List<JSONObject> entities  = ((List<JSONObject>) objectMapper.readValue(new File("apidata.json"), new TypeReference<JSONObject>() {}));
 
         return new ResponseEntity<Object>(entities, HttpStatus.OK);
     }
